@@ -10,7 +10,7 @@ from .models import URLMap
 from .views import get_unique_short_id
 
 
-@app.route('/api/id/', methods=['POST',])
+@app.route('/api/id/', methods=['POST', ])
 def get_new_short_url():
     """Создает запись в бд о новой ссылке.
        Попутно проверяя данные.
@@ -58,7 +58,7 @@ def get_new_short_url():
     }), 201
 
 
-@app.route('/api/id/<string:short_id>/', methods=['GET',])
+@app.route('/api/id/<string:short_id>/', methods=['GET', ])
 def get_original(short_id):
     """Возвращает оригинальную ссылку по ID."""
     url_map = URLMap.query.filter_by(short=short_id).first()

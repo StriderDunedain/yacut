@@ -13,7 +13,7 @@ CHARS = ascii_letters + digits
 CHAR_LEN = len(CHARS)
 
 
-@app.route('/', methods=['GET', 'POST',])
+@app.route('/', methods=['GET', 'POST', ])
 def main_page():
     """Главная страница проекта с формой для ссылок."""
     form = URL_Form()
@@ -43,7 +43,7 @@ def main_page():
     return render_template('index.html', form=form)
 
 
-@app.route('/url/<string:short>/', methods=['GET', 'POST',])
+@app.route('/url/<string:short>/', methods=['GET', 'POST', ])
 def final_view(short):
     """Вью главной страницы уже с новоиспченной ссылкой."""
     short_url = BASE_ROUTE + short
@@ -51,7 +51,7 @@ def final_view(short):
     return render_template('index.html', short=short_url, form=form)
 
 
-@app.route('/<string:short>', methods=['GET',])
+@app.route('/<string:short>', methods=['GET', ])
 def redirect_view(short):
     """Переходит на страницу основного URL."""
     url_map = URLMap.query.filter_by(short=short).first()
