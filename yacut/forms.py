@@ -10,9 +10,8 @@ class URL_Form(FlaskForm):
         ]
     )
     custom_id = StringField(
-        'Короткий ID из 6 знаков', validators=[
-            DataRequired(message='Обязательное поле'),
-            Length(16), Optional(),
+        'Короткий ID из 16 знаков', validators=[
+            Length(max=16), Optional(),
         ]
     )
     submit = SubmitField('Запилить')
