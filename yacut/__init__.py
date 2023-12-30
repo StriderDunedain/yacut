@@ -1,8 +1,8 @@
 from flask import Flask, render_template
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from settings import Config
 
+from settings import Config
 
 app = Flask(__name__)
 
@@ -17,4 +17,4 @@ def page_not_found(error):
     return render_template('404.html'), 404
 
 
-from . import api_views, views, models, forms
+from . import api_views, forms, models, views

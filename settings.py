@@ -1,6 +1,5 @@
 import os
 
-
 BASE_ROUTE = 'http://localhost/'
 
 

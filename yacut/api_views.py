@@ -1,13 +1,13 @@
 from string import ascii_letters, digits
 
-from flask import abort, request, jsonify
 import validators
+from flask import abort, jsonify, request
 
+from settings import BASE_ROUTE
 from yacut import app, db
 
 from .models import URLMap
 from .views import get_unique_short_id
-from settings import BASE_ROUTE
 
 
 @app.route('/api/id/', methods=['POST',])

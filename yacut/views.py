@@ -1,12 +1,13 @@
-from string import ascii_letters, digits
 from random import randint
+from string import ascii_letters, digits
 
 from flask import abort, flash, redirect, render_template
 
 from settings import BASE_ROUTE
+
+from . import app, db
 from .forms import URL_Form
 from .models import URLMap
-from . import app, db
 
 CHARS = ascii_letters + digits
 CHAR_LEN = len(CHARS)
