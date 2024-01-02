@@ -18,7 +18,7 @@ def main_page():
     """Главная страница проекта с формой для ссылок."""
     form = URL_Form()
     if form.validate_on_submit():
-        original = form.original_url.data
+        original = form.original_link.data
         short = form.custom_id.data
 
         if short == '' or short is None:

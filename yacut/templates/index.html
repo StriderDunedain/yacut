@@ -16,17 +16,17 @@
               {{ form.csrf_token }}
               <div>
                 <div>
-                  {{ form.original_url(class="form-control form-control-lg py-3 mb-3", placeholder=form.original_url.label.text) }}
-                  {% if form.original_url.errors %}
-                    {% for error in form.original_url.errors %}
+                  {{ form.original_link(class="form-control form-control-lg py-3 mb-3", placeholder=form.original_link.label.text) }}
+                  {% if form.original_link.errors %}
+                    {% for error in form.original_link.errors %}
                       <p><span style="color:red">{{ error }}</span></p>
                     {% endfor %}
                   {% endif %}
                 </div>
                 <div>
                   {{ form.custom_id(class="form-control form-control-lg py-2 mb-3", placeholder=form.custom_id.label.text) }}
-                  {% if form.original_url.errors %}
-                    {% for error in form.original_url.errors %}
+                  {% if form.original_link.errors %}
+                    {% for error in form.original_link.errors %}
                       <p><span style="color:red">{{ error }}</span></p>
                     {% endfor %}
                   {% endif %}
