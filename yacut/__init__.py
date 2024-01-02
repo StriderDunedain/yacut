@@ -1,14 +1,19 @@
+import os
 from flask import Flask, render_template
-from flask_migrate import Migrate
+# from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
-from settings import Config
+# from settings import Config
 
 app = Flask(__name__)
-app.config.from_object(Config)
+# app.config.from_object(Config)
+SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+SECRET_KEY = os.getenv('SECRET_KEY')
+
 
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+# migrate = Migrate(app, db)
 
 
 @app.errorhandler(404)
