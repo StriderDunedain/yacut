@@ -23,7 +23,8 @@ except ImportError as exc:
     if any(obj in exc.name for obj in ['models', 'URLMap']):
         raise AssertionError('В файле models не найдена модель URLMap')
     raise AssertionError(
-        'Не обнаружен объект класса SQLAlchemy. Создайте его и назовите db.'
+        'Не обнаружен объект класса SQLAlchemy. Создайте его и назовите db.',
+        exc
     )
 
 
