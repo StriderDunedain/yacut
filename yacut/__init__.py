@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template
-# from flask_migrate import Migrate
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 # from settings import Config
@@ -13,7 +13,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 db = SQLAlchemy(app)
-# migrate = Migrate(app, db)
+migrate = Migrate(app, db)
 
 
 @app.errorhandler(404)
