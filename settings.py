@@ -1,6 +1,9 @@
 import os
+import re
 
 BASE_ROUTE = 'http://localhost/'
+CUSTOM_LENGTH_REGEX = re.compile(r'^[a-zA-Z0-9]{1,16}$')
+DEFAULT_LENGTH = 6
 
 
 class Config(object):

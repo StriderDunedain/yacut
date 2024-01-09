@@ -1,9 +1,11 @@
+import re
+from http import HTTPStatus
 from string import ascii_letters, digits
 
 import validators
 from flask import abort, jsonify, request
 
-from settings import BASE_ROUTE
+from settings import BASE_ROUTE, CUSTOM_LENGTH_REGEX
 from yacut import app, db
 
 from .models import URLMap
@@ -18,31 +20,34 @@ def get_new_short_url():
     data = request.get_json()
 
     if data is None:
-        return jsonify({'message': 'Отсутствует тело запроса'}), 400
+        return jsonify({'message': 'Отсутствует тело запроса'}), HTTPStatus.BAD_REQUEST
 
     original = data.get('url')
     short = data.get('custom_id')
 
     if original is None:
-        return jsonify({'message': '"url" является обязательным полем!'}), 400
+        return jsonify({'message': '"url" является обязательным полем!'}), HTTPStatus.BAD_REQUEST
     if not validators.url(original):
-        abort(400)
+        abort(HTTPStatus.BAD_REQUEST)
 
     if short is None or short == '':
         short = get_unique_short_id()
-    if len(short) > 16:
+    if not re.search(
+        pattern=CUSTOM_LENGTH_REGEX,
+        string=short
+    ):
         return jsonify(
             {'message': 'Указано недопустимое имя для короткой ссылки'}
-        ), 400
+        ), HTTPStatus.BAD_REQUEST
 
     if URLMap.query.filter_by(short=short).count():
         return jsonify(
             {'message': 'Предложенный вариант короткой ссылки уже существует.'}
-        ), 400
+        ), HTTPStatus.BAD_REQUEST
     if not check_short(short):
         return jsonify(
             {'message': 'Указано недопустимое имя для короткой ссылки'}
-        ), 400
+        ), HTTPStatus.BAD_REQUEST
 
     new_url_map = URLMap(
         original=original,
@@ -63,8 +68,8 @@ def get_original(short_id):
     """Возвращает оригинальную ссылку по ID."""
     url_map = URLMap.query.filter_by(short=short_id).first()
     if url_map is not None:
-        return jsonify({'url': url_map.original}), 200
-    return jsonify({'message': 'Указанный id не найден'}), 404
+        return jsonify({'url': url_map.original}), HTTPStatus.OK
+    return jsonify({'message': 'Указанный id не найден'}), HTTPStatus.NOT_FOUND
 
 
 def check_short(short):
