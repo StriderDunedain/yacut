@@ -1,7 +1,7 @@
 from random import randint
 from string import ascii_letters, digits
 
-from flask import abort, flash, redirect, render_template
+from flask import flash, redirect, render_template
 
 from settings import BASE_ROUTE, DEFAULT_LENGTH
 
@@ -54,10 +54,8 @@ def final_view(short):
 @app.route('/<string:short>', methods=['GET', ])
 def redirect_view(short):
     """Переходит на страницу основного URL."""
-    url_map = URLMap.query.filter_by(short=short).first()
-    if url_map is not None:
-        return redirect(url_map.original)
-    abort(404)
+    url_map = URLMap.query.filter_by(short=short).first_or_404()
+    return redirect(url_map.original)
 
 
 def get_unique_short_id():

@@ -60,7 +60,7 @@ def get_new_short_url():
     return jsonify({
         'url': new_url_map.original,
         'short_link': BASE_ROUTE + new_url_map.short
-    }), 201
+    }), HTTPStatus.CREATED
 
 
 @app.route('/api/id/<string:short_id>/', methods=['GET', ])
